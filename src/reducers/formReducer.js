@@ -9,30 +9,23 @@ export function entity(state = initialState, action) {
             localStorage.setItem('testKey', JSON.stringify(state));
             return state;
         }
-
         case ENTITY.EDIT: {
             const index = state.findIndex(payload =>
                 payload.id === action.payload.id);
 
             if (index !== -1) {
-
                 const newState = state.map(payload => {
-
                     if (payload.id === action.payload.id) {
-
                         return action.payload;
                     } else {
                         return payload;
                     }
-
                 });
                 localStorage.setItem('testKey', JSON.stringify(newState));
                 return newState;
             } else {
-
                 return state;
             }
-
         }
         case ENTITY.REMOVE: {
             state.splice(state.indexOf(action.payload), 1);

@@ -7,36 +7,10 @@ import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import { entityRemove, modalRemoveToggle } from '../ac/actionCreators';
 
-
-
 const handleSubmitForm = (payload, dispatch, props) => {
   props.modalRemoveToggle();
-
   props.entityRemove(payload);
-
-  props.reset();
 };
-
-/*
-const validate = values => {
-  const errors = {};
-
-  if (!values.name) {
-    errors.name = 'Required';
-  }
-
-  if (!values.quantity) {
-    errors.quantity = 'Required';
-  }
-
-  if (!values.status) {
-    errors.status = 'Required';
-  }
-
-  return errors;
-};
-
-*/
 
 
 class DeleteForm extends Component {
@@ -44,14 +18,13 @@ class DeleteForm extends Component {
   componentWillReceiveProps(nextProps) {
     const { initialize, user } = this.props;
     if (nextProps.user &&
-        nextProps.user.id &&
-        (!user || user.id !== nextProps.user.id)) {
-         initialize(nextProps.user);
+      nextProps.user.id &&
+      (!user || user.id !== nextProps.user.id)) {
+      initialize(nextProps.user);
     };
   }
 
   render() {
-
     const {
       handleSubmit,
       pristine,
@@ -67,7 +40,7 @@ class DeleteForm extends Component {
         label="Cancel"
         primary
         onClick={modalRemoveToggle}
-      />,
+      />
     ];
 
     return (
@@ -77,7 +50,6 @@ class DeleteForm extends Component {
         modal={false}
         actions={actions}
         open={open}
-
       >
         <form onSubmit={handleSubmit}>
           <Field
@@ -134,7 +106,6 @@ class DeleteForm extends Component {
             label="Submit"
             primary
             onClick={handleSubmit}
-          //           disabled={pristine || submitting || invalid}
           />
         </form>
       </Dialog>
@@ -147,7 +118,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-
   entityRemove,
   modalRemoveToggle,
 };

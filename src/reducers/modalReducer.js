@@ -2,8 +2,8 @@ import { combineReducers } from 'redux';
 import { MODAL } from '../ac/actionTypes';
 
 const initialState = {
-    data: null,
-    open: false
+    open: false,
+    user: null
 };
 
 export function addModalOpen(state = false, action) {
@@ -16,13 +16,12 @@ export function addModalOpen(state = false, action) {
 }
 
 export function editModalOpen(state = initialState, action) {
-    
     switch (action.type) {
         case MODAL.EDIT.TOGGLE:
-        const payload = action;
+        const { payload } = action;
             return {
                 open: !state.open,
-                data: payload
+                user: payload
             };
         default:
             return state;
@@ -37,7 +36,6 @@ export function removeModalOpen(state = false, action) {
             return state;
     }
 }
-
 
 export default combineReducers({
     addModalOpen,

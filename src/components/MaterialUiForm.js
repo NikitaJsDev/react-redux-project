@@ -6,18 +6,13 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import { modalAddToggle, entityAdd } from '../ac/actionCreators';
-//import asyncValidate from './asyncValidate';
 
 
 const handleSubmitForm = (data, dispatch, props) => {
-
   props.onToggle();
-
   props.entityAdd(data);
-
   props.reset();
 };
-
 
 const validate = values => {
   const errors = {};
@@ -25,15 +20,15 @@ const validate = values => {
   if (!values.name) {
     errors.name = 'Required';
   }
-  /*
-    if (!values.quantity) {
-      errors.quantity = 'Required';
-    }
-  
-    if (!values.status) {
-      errors.status = 'Required';
-    }
-  */
+
+  if (!values.quantity) {
+    errors.quantity = 'Required';
+  }
+
+  if (!values.status) {
+    errors.status = 'Required';
+  }
+
   return errors;
 };
 
@@ -42,12 +37,9 @@ const style = {
 };
 
 
-
 class MaterialUiForm extends Component {
 
-
   render() {
-
     const {
       handleSubmit,
       pristine,
@@ -67,7 +59,6 @@ class MaterialUiForm extends Component {
       />,
     ];
 
-
     return (
       <div>
         <RaisedButton
@@ -76,7 +67,6 @@ class MaterialUiForm extends Component {
           onClick={onToggle}
           style={style}
         />
-
         <Dialog
           title="Form"
           modal={false}
@@ -161,7 +151,6 @@ const mapDispatchToProps = {
 const form = reduxForm({
   form: 'MaterialUiForm',
   validate,
- // asyncValidate,
   onSubmit: handleSubmitForm,
 })(MaterialUiForm);
 

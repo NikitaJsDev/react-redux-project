@@ -12,26 +12,26 @@ import RaisedButton from 'material-ui/RaisedButton';
 import EditForm from './EditForm';
 import DeleteForm from './DeleteForm';
 import { MODAL } from '../ac/actionTypes';
+import { modalEditToggle, modalRemoveToggle } from '../ac/actionCreators';
 
 
 class AppTable extends Component {
+  
   state = {
     selected: [1],
     user: null
   };
-
 
   isSelected = index => this.state.selected.indexOf(index) !== -1;
 
   handleItemEdit = user => () => {
     const { handleEdit } = this.props;
     handleEdit(user);
-
   }
 
   handleItemRemove = user => () => {
     const { handleRemove } = this.props;
-    this.setState({ user }, handleRemove(user));
+    this.setState({ user }, handleRemove);
   }
 
   handleRowSelection = selectedRows => {
@@ -41,8 +41,6 @@ class AppTable extends Component {
   };
 
   render() {
-
-
     return (
       <div>
         <Table onRowSelection={this.handleRowSelection}>
@@ -91,16 +89,15 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-
   handleEdit: payload => {
     dispatch({ type: MODAL.EDIT.TOGGLE, payload });
   },
   handleRemove: () => {
     dispatch({ type: MODAL.REMOVE.TOGGLE });
   },
-
+  modalEditToggle,
+  modalRemoveToggle
 });
-
 
 export default connect(
   mapStateToProps,

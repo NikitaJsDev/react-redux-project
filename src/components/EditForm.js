@@ -8,18 +8,11 @@ import Dialog from 'material-ui/Dialog';
 import { entityEdit, modalEditToggle } from '../ac/actionCreators';
 
 
-
-
 const handleSubmitForm = (payload, dispatch, props) => {
-
   props.entityEdit(payload);
-
-  props.modalEditToggle(payload);
-
-  props.reset();
+  props.modalEditToggle(null);
 };
 
-/*
 const validate = values => {
   const errors = {};
 
@@ -38,9 +31,6 @@ const validate = values => {
   return errors;
 };
 
-*/
-
-
 class EditForm extends Component {
 
   componentWillReceiveProps(nextProps) {
@@ -53,7 +43,6 @@ class EditForm extends Component {
   }
 
   render() {
-
     const {
       handleSubmit,
       pristine,
@@ -63,7 +52,6 @@ class EditForm extends Component {
       open,
       data
     } = this.props;
-
 
     const actions = [
       <FlatButton
@@ -137,7 +125,7 @@ class EditForm extends Component {
             label="Submit"
             primary
             onClick={handleSubmit}
-            disabled={pristine || submitting }
+            disabled={pristine || submitting}
           />
         </form>
       </Dialog>
@@ -147,7 +135,7 @@ class EditForm extends Component {
 
 const mapStateToProps = state => ({
   open: state.modal.editModalOpen.open,
-  data: state.modal.editModalOpen.data
+  user: state.modal.editModalOpen.user
 });
 
 const mapDispatchToProps = {
@@ -157,6 +145,7 @@ const mapDispatchToProps = {
 
 const form = reduxForm({
   form: 'Edit Form',
+  validate,
   onSubmit: handleSubmitForm,
 })(EditForm);
 
